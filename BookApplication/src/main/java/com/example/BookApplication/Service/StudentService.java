@@ -6,7 +6,9 @@ import com.example.BookApplication.Model.Student;
 import com.example.BookApplication.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,6 +54,26 @@ public class StudentService {
             return "No Student Exists with the Given Id!";
         studentRepository.deleteById(id);
         return "Student Deleted Successfully!";
+    }
+
+    public List<Student>getStudentByDepartment(String department){
+        List<Student> studentList=studentRepository.findByDepartment(department);
+        if(studentList.isEmpty())
+            return new ArrayList<>();
+        return studentList;
+    }
+
+    public Student getStudentByEmail(String email){
+        return studentRepository.findByEmail(email);
+    }
+
+    public List<Student>searchStudentByName(String name){
+
+        List<Student>studentList=studentRepository.findByNameContaining(name);
+
+        if (studentList.isEmpty())
+            return new ArrayList<>();
+        return studentList;
     }
 
 

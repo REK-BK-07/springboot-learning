@@ -4,6 +4,7 @@ import com.example.BookApplication.Dto.StudentDTO;
 import com.example.BookApplication.Model.Student;
 import com.example.BookApplication.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class StudentController {
     }
 
     @GetMapping("/student/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Student getStudentByid(@PathVariable int id){
         return studentService.getStudentById(id);
     }
@@ -36,6 +38,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/student/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteStudent(@PathVariable int id){
         return studentService.deleteStudent(id);
     }

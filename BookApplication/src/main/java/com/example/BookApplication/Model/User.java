@@ -1,32 +1,33 @@
 package com.example.BookApplication.Model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
-@Table(name="students")
+@Table(name="users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+public class User {
 
-public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(unique = true, nullable = false)
+    @Column(unique = true,nullable = false)
     private String email;
 
-    @Column(name = "department")
-    private String department;
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String role;
+
 
 }
